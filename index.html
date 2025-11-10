@@ -1,66 +1,573 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>UpDating 💕</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UpDating 💕 | Home</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap");
 
-  <body>
-    <!-- Floating hearts background -->
-    <div class="hearts"></div>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Nunito", sans-serif;
+    }
 
-    <!-- Header -->
-    <header class="header">
-      <h1 class="logo">💌 UpDating</h1>
-      <nav class="nav">
-        <a href="#">Home</a>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
-      </nav>
-    </header>
+    body {
+      background: linear-gradient(160deg, #ff98b7, #fabacd, #ffe4ec, #facc7d);
+      background-size: 600% 600%;
+      animation: bgshift 60s ease-in-out infinite;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      color: #444;
+      overflow-x: hidden;
+    }
 
-    <!-- Main Content -->
-    <main class="main">
-      <div class="content-wrapper">
-        <!-- Typing Hero Title -->
-        <div class="hero-title">
-          <h2 class="typewriter">
-            <span id="typewriterText"></span><span class="cursor"></span>
-          </h2>
-        </div>
+    @keyframes bgshift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
 
-        <!-- Card -->
-        <div class="card">
-  <p class="badge">🌸 Early Bird Access</p>
-  <h2>Unlock Your Match</h2>
-  <p class="desc">
-    Join the cutest way to meet friends (or more 💕) in your college.
-  </p>
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: #fffafc;
+      border-bottom: 2px solid #ffd4e5;
+      box-shadow: 0 2px 6px rgba(255, 182, 193, 0.3);
+    }
 
-  <div class="price">
-    <span class="old">
-      ₹199
-      <span class="cross"></span>
-    </span>
-    <span class="new">₹49</span>
+    .logo {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #ff4d6d;
+    }
+
+    nav a {
+      margin-left: 1.2rem;
+      text-decoration: none;
+      color: #ff8fab;
+      font-weight: 600;
+      transition: color 0.2s ease;
+    }
+
+    nav a:hover {
+      color: #ff4d6d;
+    }
+
+    .signup-btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 0.6rem 1.6rem;
+      border: none;
+      border-radius: 50px;
+      background: linear-gradient(145deg, #ff9fba, #ff7fa5);
+      color: #fff;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(255, 105, 135, 0.25);
+      transition: all 0.3s ease-in-out;
+    }
+
+    .signup-btn span {
+      position: relative;
+      display: inline-block;
+      transition: transform 0.4s ease, margin-right 0.4s ease;
+    }
+
+    .signup-btn::after {
+      content: "→";
+      position: absolute;
+      right: -25px;
+      opacity: 0;
+      font-size: 1.2rem;
+      transition: all 0.4s ease;
+    }
+
+    .signup-btn:hover {
+      background: linear-gradient(145deg, #ff7fa5, #ff4d6d);
+      box-shadow: 0 6px 16px rgba(255, 105, 135, 0.4);
+      transform: scale(1.05);
+    }
+
+    .signup-btn:hover span {
+      transform: translateX(-8px);
+      margin-right: 14px;
+    }
+
+    .signup-btn:hover::after {
+      right: 18px;
+      opacity: 1;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .typewriter {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #ff4d6d;
+      letter-spacing: 1px;
+      margin-top: 1rem;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 4px;
+      height: 1.6rem;
+      background: #ff4d6d;
+      margin-left: 5px;
+      border-radius: 2px;
+      animation: blink 0.7s steps(2, start) infinite, glow 2s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      50.1%, 100% { opacity: 0; }
+    }
+
+    @keyframes glow {
+      0%, 100% { box-shadow: 0 0 6px #ff4d6d; }
+      50% { box-shadow: 0 0 12px #ff8fab; }
+    }
+
+    /* 💛 Bumble-style Tilted Image Slider */
+    .image-slider {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      height: 240px;
+      margin: 3rem 0 1rem 0;
+    }
+
+    .slider-track {
+  display: flex;
+  width: max-content; /* auto size to fit all images */
+  animation: scroll 60s linear infinite;
+}
+
+    .image-slider img {
+      width: 220px;
+      height: 220px;
+      object-fit: cover;
+      margin: 0 12px;
+      border-radius: 20px;
+      transform: rotate(-6deg);
+      box-shadow: 0 10px 20px rgba(255, 182, 193, 0.3);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      border: 3px solid rgba(255, 255, 255, 0.4);
+      background: rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(10px);
+    }
+
+    .image-slider img:nth-child(even) {
+      transform: rotate(6deg);
+    }
+
+    .image-slider img:hover {
+      transform: rotate(0deg) scale(1.05);
+      box-shadow: 0 15px 25px rgba(255, 160, 200, 0.5);
+      z-index: 2;
+    }
+
+    @keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+    /* Floating Hearts */
+    .floating-bg {
+      position: fixed;
+      top: 90px;
+      left: 0;
+      width: 100%;
+      height: calc(100% - 90px);
+      overflow: hidden;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .floating-bg span {
+      position: absolute;
+      top: -10px;
+      font-size: 1rem;
+      opacity: 0.6;
+      color: rgba(255, 105, 135, 0.4);
+      animation: fall linear forwards;
+      filter: blur(1px);
+      mix-blend-mode: screen;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* 💎 Glassmorphic Card */
+    .card {
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-radius: 20px;
+      border: 1.5px solid rgba(255, 255, 255, 0.4);
+      text-align: center;
+      padding: 2.5rem 2rem;
+      width: 320px;
+      box-shadow:
+        0 8px 25px rgba(255, 182, 193, 0.3),
+        0 0 40px rgba(255, 160, 200, 0.15),
+        inset 0 0 20px rgba(255, 255, 255, 0.15);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      z-index: 2;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow:
+        0 15px 40px rgba(255, 182, 193, 0.45),
+        0 0 60px rgba(255, 160, 200, 0.25),
+        inset 0 0 25px rgba(255, 255, 255, 0.2);
+    }
+
+    .badge {
+      background: #ffe0f0;
+      color: #ff4d6d;
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+
+    .card h2 {
+      font-size: 1.6rem;
+      color: #ff4d6d;
+      margin-bottom: 0.5rem;
+    }
+
+    .desc {
+      font-size: 0.95rem;
+      color: #666;
+      margin-bottom: 1.8rem;
+    }
+
+    .price {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 0.8rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .old {
+      position: relative;
+      color: #999;
+      font-size: 1.3rem;
+      font-weight: 600;
+      display: inline-block;
+    }
+
+    .old .cross::before, .old .cross::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 120%;
+      height: 2px;
+      background: #ff4d6d;
+      transform-origin: center;
+      border-radius: 1px;
+      animation: crossPulse 2s ease-in-out infinite;
+    }
+
+    .old .cross::before { transform: translate(-50%, -50%) rotate(25deg); }
+    .old .cross::after { transform: translate(-50%, -50%) rotate(-25deg); }
+
+    @keyframes crossPulse {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-50%, -50%) scale(1.15); }
+    }
+
+    .new {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #ff4d6d;
+    }
+
+    .offer-valid {
+      font-size: 0.9rem;
+      color: #ff4d6d;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      animation: offerPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes offerPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.8; transform: scale(1.05); }
+    }
+
+    /* 💝 Coupon Section */
+    .coupon-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .coupon-box {
+      position: relative;
+      width: 80%;
+    }
+
+    .coupon-box input {
+  width: 100%;
+  padding: 0.6rem 5.8rem 0.6rem 1rem; /* 🔥 more space for button */
+  border-radius: 10px;
+  border: 1.5px solid #ffd6e0;
+  background: rgba(255, 255, 255, 0.6);
+  font-size: 0.95rem;
+  outline: none;
+  text-align: left;
+  transition: all 0.3s ease;
+}
+
+
+    .coupon-box input:focus {
+      border-color: #ff8fab;
+      box-shadow: 0 0 10px rgba(255, 182, 193, 0.3);
+      background: rgba(255, 255, 255, 0.8);
+    }
+
+    .apply-btn {
+      position: absolute;
+      right: 5px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: linear-gradient(145deg, #ff9fba, #ff7fa5);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 0.4rem 0.8rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 10px rgba(255, 105, 135, 0.25);
+    }
+
+    .apply-btn:hover {
+      background: linear-gradient(145deg, #ff4d6d, #ff7096);
+      transform: translateY(-50%) scale(1.05);
+    }
+
+    .coupon-message {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #ff4d6d;
+      height: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .btn {
+      background: linear-gradient(145deg, #ff8fab, #ff7096);
+      color: #fff;
+      border: none;
+      padding: 0.9rem 2rem;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 6px 10px rgba(255, 105, 135, 0.3);
+      transition: all 0.25s ease;
+    }
+
+    .btn:hover {
+      background: linear-gradient(145deg, #ff4d6d, #ff7096);
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(255, 100, 150, 0.6);
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #ff4d6d;
+      background: #fffafc;
+      padding: 1rem;
+      border-top: 2px solid #ffd4e5;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 class="logo">💌 UpDating</h1>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="login.html">
+        <button class="signup-btn"><span>Sign Up</span></button>
+      </a>
+    </nav>
+  </header>
+
+  <div class="floating-bg"></div>
+
+  <main>
+    <h2 class="typewriter">
+      <span id="typewriterText"></span><span class="cursor"></span>
+    </h2>
+
+    <div class="image-slider">
+  <div class="slider-track">
+    <img src="images/image1.jpg" alt="">
+    <img src="images/image2.jpg" alt="">
+    <img src="images/image3.jpg" alt="">
+    <img src="images/image4.jpg" alt="">
+    <img src="images/image5.jpg" alt="">
+    <img src="images/image6.jpg" alt="">
+    <img src="images/image7.jpg" alt="">
+    <img src="images/image8.jpg" alt="">
+    <img src="images/image9.jpg" alt="">
+    <img src="images/image10.jpg" alt="">
+    <!-- Duplicate for infinite loop -->
+    <img src="images/image1.jpg" alt="">
+    <img src="images/image2.jpg" alt="">
+    <img src="images/image3.jpg" alt="">
+    <img src="images/image4.jpg" alt="">
+    <img src="images/image5.jpg" alt="">
+    <img src="images/image6.jpg" alt="">
+    <img src="images/image7.jpg" alt="">
+    <img src="images/image8.jpg" alt="">
+    <img src="images/image9.jpg" alt="">
+    <img src="images/image10.jpg" alt="">
   </div>
-
-  <!-- 🎄 Offer valid till Christmas -->
-  <p class="offer-valid">🎄 Offer valid till Christmas 🎁</p>
-
-  <button class="btn" id="buyBtn">Get Access Now 💖</button>
 </div>
 
+
+    <div class="card">
+      <p class="badge">🌸 Early Bird Access</p>
+      <h2>Unlock Your Match</h2>
+      <p class="desc">Join the cutest way to meet friends (or more 💕) in your college.</p>
+
+      <div class="price">
+        <span class="old" id="oldPrice" style="display:none;">₹199<span class="cross"></span></span>
+        <span class="new" id="price">₹199</span>
       </div>
-    </main>
 
-    <!-- Footer -->
-    <footer class="footer">
-      © 2025 CampusMatch | Made with 💕
-    </footer>
+      <p class="offer-valid">🎄 Offer valid till Christmas 🎁</p>
 
-    <script src="script.js"></script>
-  </body>
+      <div class="coupon-section">
+        <div class="coupon-box">
+          <input type="text" id="couponInput" placeholder="Enter coupon code" maxlength="10">
+          <button id="applyCoupon" class="apply-btn">Apply 💝</button>
+        </div>
+        <p id="couponMessage" class="coupon-message"></p>
+      </div>
+
+      <button class="btn">Get Access Now 💖</button>
+    </div>
+  </main>
+
+  <footer>© 2025 CampusMatch. Made with 💕.</footer>
+
+  <script>
+    const heroTexts = ["Find Your Match 💕", "Meet New Friends 🌸", "Start Your Story ✨", "UpDating Lifes ❤️"];
+    let tIndex = 0, tChar = 0;
+    const speed = 100, eraseSpeed = 50, pause = 1500;
+    const heroEl = document.getElementById("typewriterText");
+
+    function type() {
+      if (tChar < heroTexts[tIndex].length) {
+        heroEl.textContent += heroTexts[tIndex].charAt(tChar++);
+        setTimeout(type, speed);
+      } else setTimeout(erase, pause);
+    }
+
+    function erase() {
+      if (tChar > 0) {
+        heroEl.textContent = heroTexts[tIndex].substring(0, --tChar);
+        setTimeout(erase, eraseSpeed);
+      } else {
+        tIndex = (tIndex + 1) % heroTexts.length;
+        setTimeout(type, 400);
+      }
+    }
+    window.onload = type;
+
+    // Floating hearts
+    const bgContainer = document.querySelector(".floating-bg");
+    function createFloatingItem() {
+      const item = document.createElement("span");
+      item.textContent = Math.random() > 0.5 ? "💖" : "✨";
+      item.style.left = Math.random() * 100 + "vw";
+      item.style.fontSize = Math.random() * 16 + 10 + "px";
+      item.style.opacity = Math.random() * 0.6 + 0.4;
+      item.style.animationDuration = Math.random() * 8 + 6 + "s";
+      bgContainer.appendChild(item);
+      setTimeout(() => item.remove(), 12000);
+    }
+    setInterval(createFloatingItem, 400);
+
+    // Pause Bumble slider
+    const slider = document.querySelector(".image-slider");
+    slider.addEventListener("mouseenter", () => {
+      slider.querySelector(".slider-track").style.animationPlayState = "paused";
+    });
+    slider.addEventListener("mouseleave", () => {
+      slider.querySelector(".slider-track").style.animationPlayState = "running";
+    });
+
+    // Coupon Code Logic
+    const couponInput = document.getElementById("couponInput");
+    const applyCouponBtn = document.getElementById("applyCoupon");
+    const priceEl = document.getElementById("price");
+    const messageEl = document.getElementById("couponMessage");
+    const oldPriceEl = document.getElementById("oldPrice");
+
+    applyCouponBtn.addEventListener("click", () => {
+      const code = couponInput.value.trim().toUpperCase();
+      if (code === "LPU69") {
+        oldPriceEl.style.display = "inline-block";
+        priceEl.textContent = "₹69";
+        priceEl.style.color = "#ff4d6d";
+        messageEl.textContent = "✨ Coupon applied successfully!";
+        messageEl.style.color = "#ff4d6d";
+      } else if (code === "") {
+        messageEl.textContent = "Please enter a coupon code 💭";
+        messageEl.style.color = "#ff8fab";
+        oldPriceEl.style.display = "none";
+        priceEl.textContent = "₹199";
+      } else {
+        messageEl.textContent = "❌ Invalid code — try again!";
+        messageEl.style.color = "#ff8fab";
+        oldPriceEl.style.display = "none";
+        priceEl.textContent = "₹199";
+      }
+    });
+  </script>
+</body>
 </html>

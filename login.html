@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UpDating 💕 | Login</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap");
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Nunito", sans-serif;
+    }
+
+    body {
+      background: linear-gradient(160deg, #ff98b7, #fabacd, #ffe4ec, #facc7d);
+      background-size: 600% 600%;
+      animation: bgshift 30s ease infinite;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      color: #444;
+    }
+
+    @keyframes bgshift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: #fffafc;
+      border-bottom: 2px solid #ffd4e5;
+      box-shadow: 0 2px 6px rgba(255, 182, 193, 0.3);
+    }
+
+    .logo {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #ff4d6d;
+    }
+
+    nav a {
+      margin-left: 1.2rem;
+      text-decoration: none;
+      color: #ff8fab;
+      font-weight: 600;
+      transition: color 0.2s ease;
+    }
+
+    nav a:hover {
+      color: #ff4d6d;
+    }
+
+    /* Floating hearts and sparkles */
+    .floating-bg {
+      position: fixed;
+      top: 90px;
+      left: 0;
+      width: 100%;
+      height: calc(100% - 90px);
+      overflow: hidden;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .floating-bg span {
+      position: absolute;
+      top: -10px;
+      font-size: 1rem;
+      opacity: 0.6;
+      color: rgba(255, 105, 135, 0.4);
+      animation: fall linear forwards;
+      filter: blur(1px);
+      mix-blend-mode: screen;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* 🌸 Tab Switch (outside card) */
+    .tab-switch {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      position: relative;
+      margin-bottom: 2rem;
+    }
+
+    .tab-switch .tab {
+      background: none;
+      border: none;
+      outline: none;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #ff8fab;
+      cursor: pointer;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    .tab-switch .tab:hover {
+      color: #ff4d6d;
+    }
+
+    .tab-switch .tab.active {
+      color: #ff4d6d;
+    }
+
+    /* ✨ Animated underline */
+    .underline {
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      height: 3px;
+      width: 70px;
+      background: linear-gradient(90deg, #ff8fab, #ff4d6d);
+      border-radius: 3px;
+      transition: all 0.4s ease;
+      box-shadow: 0 0 10px rgba(255, 100, 150, 0.4);
+    }
+
+    .login-card {
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-radius: 20px;
+      border: 1.5px solid rgba(255, 255, 255, 0.4);
+      padding: 2.5rem 2rem;
+      width: 340px;
+      text-align: center;
+      box-shadow:
+        0 8px 25px rgba(255, 182, 193, 0.3),
+        0 0 40px rgba(255, 160, 200, 0.15),
+        inset 0 0 20px rgba(255, 255, 255, 0.15);
+      transition: all 0.3s ease;
+    }
+
+    .login-card:hover {
+      box-shadow:
+        0 15px 40px rgba(255, 182, 193, 0.45),
+        0 0 60px rgba(255, 160, 200, 0.25),
+        inset 0 0 25px rgba(255, 255, 255, 0.2);
+      transform: translateY(-5px);
+    }
+
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.6s ease;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .input-group {
+      margin-bottom: 1.2rem;
+      text-align: left;
+    }
+
+    .input-group label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: #ff4d6d;
+      margin-bottom: 0.3rem;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 0.7rem 1rem;
+      border-radius: 10px;
+      border: 1.5px solid #ffd4e5;
+      outline: none;
+      background: rgba(255, 255, 255, 0.6);
+      transition: all 0.2s ease;
+    }
+
+    .input-group input:focus {
+      border-color: #ff8fab;
+      box-shadow: 0 0 10px rgba(255, 155, 175, 0.3);
+      background: rgba(255, 255, 255, 0.75);
+    }
+
+    .btn {
+      background: linear-gradient(145deg, #ff8fab, #ff7096);
+      color: #fff;
+      border: none;
+      padding: 0.9rem 2rem;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 6px 10px rgba(255, 105, 135, 0.3);
+      transition: all 0.25s ease;
+      width: 100%;
+      margin-top: 0.5rem;
+    }
+
+    .btn:hover {
+      background: linear-gradient(145deg, #ff4d6d, #ff7096);
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(255, 100, 150, 0.6);
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #ff4d6d;
+      background: #fffafc;
+      padding: 1rem;
+      border-top: 2px solid #ffd4e5;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 class="logo">💌 UpDating</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="#">Help</a>
+    </nav>
+  </header>
+
+  <!-- Floating hearts & sparkles -->
+  <div class="floating-bg"></div>
+
+  <main>
+    <div class="tab-switch">
+      <button class="tab active" data-tab="login">Login 💌</button>
+      <button class="tab" data-tab="register">Register 🌸</button>
+      <span class="underline"></span>
+    </div>
+
+    <div class="login-card">
+      <!-- Login Form -->
+      <form class="tab-content active" id="login">
+        <div class="input-group">
+          <label>Email</label>
+          <input type="email" placeholder="you@example.com" required>
+        </div>
+        <div class="input-group">
+          <label>Password</label>
+          <input type="password" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn">Login 💖</button>
+      </form>
+
+      <!-- Register Form -->
+      <form class="tab-content" id="register">
+        <div class="input-group">
+          <label>Full Name</label>
+          <input type="text" placeholder="Your Name" required>
+        </div>
+        <div class="input-group">
+          <label>Email</label>
+          <input type="email" placeholder="you@example.com" required>
+        </div>
+        <div class="input-group">
+          <label>Password</label>
+          <input type="password" placeholder="Create a password" required>
+        </div>
+        <button type="submit" class="btn">Register 💞</button>
+      </form>
+    </div>
+  </main>
+
+  <footer>© 2025 CampusMatch. Made with 💕.</footer>
+
+  <script>
+    // 💞 Floating hearts & sparkles generator
+    const bgContainer = document.querySelector(".floating-bg");
+
+    function createFloatingItem() {
+      const item = document.createElement("span");
+      item.textContent = Math.random() > 0.5 ? "💖" : "✨";
+      item.style.left = Math.random() * 100 + "vw";
+      item.style.fontSize = Math.random() * 16 + 10 + "px";
+      item.style.opacity = Math.random() * 0.6 + 0.4;
+      item.style.animationDuration = Math.random() * 8 + 6 + "s";
+      bgContainer.appendChild(item);
+      setTimeout(() => item.remove(), 12000);
+    }
+
+    setInterval(createFloatingItem, 400);
+
+    // 🌸 Tab switching with underline animation
+    const tabs = document.querySelectorAll(".tab-switch .tab");
+    const underline = document.querySelector(".underline");
+    const contents = document.querySelectorAll(".tab-content");
+
+    function moveUnderline(target) {
+      const rect = target.getBoundingClientRect();
+      const parentRect = target.parentElement.getBoundingClientRect();
+      underline.style.width = rect.width + "px";
+      underline.style.left = rect.left - parentRect.left + "px";
+    }
+
+    tabs.forEach(tab => {
+      tab.addEventListener("click", () => {
+        tabs.forEach(t => t.classList.remove("active"));
+        tab.classList.add("active");
+        contents.forEach(c => c.classList.remove("active"));
+        document.getElementById(tab.dataset.tab).classList.add("active");
+        moveUnderline(tab);
+      });
+    });
+
+    window.addEventListener("load", () => moveUnderline(document.querySelector(".tab.active")));
+  </script>
+</body>
+</html>
