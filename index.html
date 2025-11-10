@@ -495,102 +495,103 @@
   <footer>© 2025 CampusMatch. Made with 💕.</footer>
 
   <script>
-    const heroTexts = ["Find Your Match 💕", "Meet New Friends 🌸", "Start Your Story ✨", "UpDating Lifes ❤️"];
-    let tIndex = 0, tChar = 0;
-    const speed = 100, eraseSpeed = 50, pause = 1500;
-    const heroEl = document.getElementById("typewriterText");
+  // 💫 Typewriter Effect
+  const heroTexts = ["Find Your Match 💕", "Meet New Friends 🌸", "Start Your Story ✨", "UpDating Lifes ❤️"];
+  let tIndex = 0, tChar = 0;
+  const speed = 100, eraseSpeed = 50, pause = 1500;
+  const heroEl = document.getElementById("typewriterText");
 
-    function type() {
-      if (tChar < heroTexts[tIndex].length) {
-        heroEl.textContent += heroTexts[tIndex].charAt(tChar++);
-        setTimeout(type, speed);
-      } else setTimeout(erase, pause);
+  function type() {
+    if (tChar < heroTexts[tIndex].length) {
+      heroEl.textContent += heroTexts[tIndex].charAt(tChar++);
+      setTimeout(type, speed);
+    } else setTimeout(erase, pause);
+  }
+
+  function erase() {
+    if (tChar > 0) {
+      heroEl.textContent = heroTexts[tIndex].substring(0, --tChar);
+      setTimeout(erase, eraseSpeed);
+    } else {
+      tIndex = (tIndex + 1) % heroTexts.length;
+      setTimeout(type, 400);
     }
+  }
+  window.onload = type;
 
-    function erase() {
-      if (tChar > 0) {
-        heroEl.textContent = heroTexts[tIndex].substring(0, --tChar);
-        setTimeout(erase, eraseSpeed);
-      } else {
-        tIndex = (tIndex + 1) % heroTexts.length;
-        setTimeout(type, 400);
-      }
-    }
-    window.onload = type;
+  // 💞 Floating Hearts
+  const bgContainer = document.querySelector(".floating-bg");
+  function createFloatingItem() {
+    const item = document.createElement("span");
+    item.textContent = Math.random() > 0.5 ? "💖" : "✨";
+    item.style.left = Math.random() * 100 + "vw";
+    item.style.fontSize = Math.random() * 16 + 10 + "px";
+    item.style.opacity = Math.random() * 0.6 + 0.4;
+    item.style.animationDuration = Math.random() * 8 + 6 + "s";
+    bgContainer.appendChild(item);
+    setTimeout(() => item.remove(), 12000);
+  }
+  setInterval(createFloatingItem, 400);
 
-    // Floating hearts
-    const bgContainer = document.querySelector(".floating-bg");
-    function createFloatingItem() {
-      const item = document.createElement("span");
-      item.textContent = Math.random() > 0.5 ? "💖" : "✨";
-      item.style.left = Math.random() * 100 + "vw";
-      item.style.fontSize = Math.random() * 16 + 10 + "px";
-      item.style.opacity = Math.random() * 0.6 + 0.4;
-      item.style.animationDuration = Math.random() * 8 + 6 + "s";
-      bgContainer.appendChild(item);
-      setTimeout(() => item.remove(), 12000);
-    }
-    setInterval(createFloatingItem, 400);
+  // 💛 Pause Bumble-style slider on hover
+  const slider = document.querySelector(".image-slider");
+  slider.addEventListener("mouseenter", () => {
+    slider.querySelector(".slider-track").style.animationPlayState = "paused";
+  });
+  slider.addEventListener("mouseleave", () => {
+    slider.querySelector(".slider-track").style.animationPlayState = "running";
+  });
 
-    // Pause Bumble slider
-    const slider = document.querySelector(".image-slider");
-    slider.addEventListener("mouseenter", () => {
-      slider.querySelector(".slider-track").style.animationPlayState = "paused";
-    });
-    slider.addEventListener("mouseleave", () => {
-      slider.querySelector(".slider-track").style.animationPlayState = "running";
-    });
+  // 💝 Coupon Code Logic
+  const couponInput = document.getElementById("couponInput");
+  const applyCouponBtn = document.getElementById("applyCoupon");
+  const priceEl = document.getElementById("price");
+  const messageEl = document.getElementById("couponMessage");
+  const oldPriceEl = document.getElementById("oldPrice");
 
-    // 💖 Auto-apply coupon if found in URL
-window.addEventListener("DOMContentLoaded", () => {
-  const urlParams = new URLSearchParams(window.location.search);
-  const couponParam = urlParams.get("coupon");
-
-  if (couponParam) {
-    couponInput.value = couponParam.toUpperCase();
-    if (couponParam.toUpperCase() === "LPU69") {
+  applyCouponBtn.addEventListener("click", () => {
+    const code = couponInput.value.trim().toUpperCase();
+    if (code === "LPU69") {
       oldPriceEl.style.display = "inline-block";
       priceEl.textContent = "₹69";
       priceEl.style.color = "#ff4d6d";
-      messageEl.textContent = "🎉 Special offer applied automatically!";
+      messageEl.textContent = "✨ Coupon applied successfully!";
       messageEl.style.color = "#ff4d6d";
+    } else if (code === "") {
+      messageEl.textContent = "Please enter a coupon code 💭";
+      messageEl.style.color = "#ff8fab";
+      oldPriceEl.style.display = "none";
+      priceEl.textContent = "₹199";
     } else {
-      messageEl.textContent = "❌ Invalid code in link!";
+      messageEl.textContent = "❌ Invalid code — try again!";
       messageEl.style.color = "#ff8fab";
       oldPriceEl.style.display = "none";
       priceEl.textContent = "₹199";
     }
-  }
-});
+  });
 
-    
-    // Coupon Code Logic
-    const couponInput = document.getElementById("couponInput");
-    const applyCouponBtn = document.getElementById("applyCoupon");
-    const priceEl = document.getElementById("price");
-    const messageEl = document.getElementById("couponMessage");
-    const oldPriceEl = document.getElementById("oldPrice");
+  // 💖 Auto-apply coupon if found in URL
+  window.addEventListener("DOMContentLoaded", () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const couponParam = urlParams.get("coupon");
 
-    applyCouponBtn.addEventListener("click", () => {
-      const code = couponInput.value.trim().toUpperCase();
-      if (code === "LPU69") {
+    if (couponParam) {
+      couponInput.value = couponParam.toUpperCase();
+      if (couponParam.toUpperCase() === "LPU69") {
         oldPriceEl.style.display = "inline-block";
         priceEl.textContent = "₹69";
         priceEl.style.color = "#ff4d6d";
-        messageEl.textContent = "✨ Coupon applied successfully!";
+        messageEl.textContent = "🎉 Special offer applied automatically!";
         messageEl.style.color = "#ff4d6d";
-      } else if (code === "") {
-        messageEl.textContent = "Please enter a coupon code 💭";
-        messageEl.style.color = "#ff8fab";
-        oldPriceEl.style.display = "none";
-        priceEl.textContent = "₹199";
       } else {
-        messageEl.textContent = "❌ Invalid code — try again!";
+        messageEl.textContent = "❌ Invalid code in link!";
         messageEl.style.color = "#ff8fab";
         oldPriceEl.style.display = "none";
         priceEl.textContent = "₹199";
       }
-    });
-  </script>
+    }
+  });
+</script>
+
 </body>
 </html>
