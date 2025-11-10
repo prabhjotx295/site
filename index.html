@@ -541,6 +541,29 @@
       slider.querySelector(".slider-track").style.animationPlayState = "running";
     });
 
+    // 💖 Auto-apply coupon if found in URL
+window.addEventListener("DOMContentLoaded", () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const couponParam = urlParams.get("coupon");
+
+  if (couponParam) {
+    couponInput.value = couponParam.toUpperCase();
+    if (couponParam.toUpperCase() === "LPU69") {
+      oldPriceEl.style.display = "inline-block";
+      priceEl.textContent = "₹69";
+      priceEl.style.color = "#ff4d6d";
+      messageEl.textContent = "🎉 Special offer applied automatically!";
+      messageEl.style.color = "#ff4d6d";
+    } else {
+      messageEl.textContent = "❌ Invalid code in link!";
+      messageEl.style.color = "#ff8fab";
+      oldPriceEl.style.display = "none";
+      priceEl.textContent = "₹199";
+    }
+  }
+});
+
+    
     // Coupon Code Logic
     const couponInput = document.getElementById("couponInput");
     const applyCouponBtn = document.getElementById("applyCoupon");
